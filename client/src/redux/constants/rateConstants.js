@@ -1,0 +1,6 @@
+// client/src/redux/constants/rateConstants.js
+
+export const RATE_CALCULATE_REQUEST = 'RATE_CALCULATE_REQUEST';
+export const RATE_CALCULATE_SUCCESS = 'RATE_CALCULATE_SUCCESS';
+export const RATE_CALCULATE_FAIL = 'RATE_CALCULATE_FAIL';
+export const RATE_CALCULATE_RESET = 'RATE_CALCULATE_RESET';

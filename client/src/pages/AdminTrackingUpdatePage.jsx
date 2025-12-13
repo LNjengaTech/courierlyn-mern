@@ -1,5 +1,3 @@
-// client/src/pages/AdminTrackingUpdatePage.jsx - Tailwind Styled
-
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -10,16 +8,16 @@ import { faPlus, faClock, faMapMarkerAlt, faSpinner, faChevronLeft } from '@fort
 import { getShipmentDetailsAdmin, resetShipmentDetailsAdmin, addTrackingEvent, resetTrackingAdd } from '../redux/actions/shipmentActions';
 
 const AdminTrackingUpdatePage = () => {
-    const { id } = useParams(); // This is the MongoDB Shipment ID
+    const { id } = useParams(); //the MongoDB Shipment ID //
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    // --- UPDATE REDUX SELECTORS/ ---
+    //---UPDATED REDUX SELECTORS/ ---
     const { loading: loadingDetails, error: errorDetails, shipment, trackingHistory } = useSelector(state => state.shipmentDetailsAdmin);
     const { loading: loadingAdd, error: errorAdd, success: successAdd } = useSelector(state => state.trackingAdd);
-    // ----------------------------
+    //-------------------------------------------
     
-    // States for Form
+    //states for Form
     const [status, setStatus] = useState('');
     const [location, setLocation] = useState('');
     const [details, setDetails] = useState('');
@@ -27,7 +25,7 @@ const AdminTrackingUpdatePage = () => {
     //const [time, setTime] = useState('');
     
     
-    // Status options for easy selection
+    //status options for easy selection
     const commonStatuses = [
         'Picked Up', 'Arrived at Hub', 'Processed for Transit', 
         'Departed Hub', 'Customs Cleared', 'Out For Delivery', 
@@ -35,18 +33,17 @@ const AdminTrackingUpdatePage = () => {
     ];
 
     useEffect(() => {
-    // 1. Logic for RE-FETCHING after a new tracking event is added
+    // 1. Logic for Re-fetching after a new tracking event is added
     if (successAdd) {
         alert('Tracking event added successfully!');
         dispatch(resetTrackingAdd());
-        // Always re-fetch the data after a successful event addition
+        // Always re-fetch the data after a successful event addition!
         dispatch(getShipmentDetailsAdmin(id));
-        // We MUST return here to prevent the second 'if' block from running immediately 
-        // with the old state, which would cause an extra redundant fetch.
-        return; 
+        
+        return;         //return here to prevent the second 'if' block from running immediately with the old state, which would cause an extra redundant fetch.
     }
 
-    // 2. Logic for INITIAL Data Fetch (Run only when component mounts or ID changes)
+    //Logic for initial data fetch (Run only when component mounts or ID changes)
     // We check if the shipment data is missing OR if the ID in the URL changed.
     // NOTE: This intentionally omits `shipment` from the dependency array to break the loop.
     if (!shipment || shipment._id !== id) {
@@ -61,15 +58,15 @@ const AdminTrackingUpdatePage = () => {
         dispatch(resetShipmentDetailsAdmin());
     };
     
-    // CRITICAL: Remove 'shipment' from dependencies to break the infinite reference loop.
-    // The fetch is now managed by checking the current state inside the effect.
-}, [dispatch, id, successAdd]);
+    // important: removed 'shipment' from dependencies to break the infinite reference loop.
+    //the fetch is now managed by checking the current state inside the effect.
+}, [dispatch, id, successAdd,]);
 
-    // 2. Submit New Tracking Event (USING REDUX)
+    //Ssubmit New Tracking Event (using redux)
     const submitHandler = (e) => {
         e.preventDefault();
 
-        // Check if shipment details are loaded and we have the ID
+        //if shipment details are loaded and we have the ID
         if (!shipment || !shipment._id) {
             alert("Error: Shipment details not loaded.");
             return;
@@ -79,24 +76,23 @@ const AdminTrackingUpdatePage = () => {
             status, 
             location, 
             details,
-            // You may want to send the actual timestamp if the form allowed setting date/time
             // timestamp: date && time ? new Date(`${date} ${time}`).toISOString() : undefined,
         };
 
-        // Dispatch the Redux action to add the event
+        //dispatch the redux action to add the event
         dispatch(addTrackingEvent(shipment._id, eventData));
     };
 
 
-    // --- UPDATE LOADING/ERROR CHECKS ---
-    // Use the Redux loading and error states for rendering
-    if (loadingDetails) { // Use the loading state from Redux
+
+    //use the Redux loading and error states for rendering
+    if (loadingDetails) { //use the loading state from Redux
         return <p className='text-center py-20 text-lg text-blue-600 dark:text-blue-400'>
             <FontAwesomeIcon icon={faSpinner} className='animate-spin mr-3' /> Loading Shipment Data...
         </p>;
     }
     
-    if (errorDetails && !shipment) { // Use the error state from Redux
+    if (errorDetails && !shipment) { //Use the error state from Redux
         return <div className='bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 p-4 rounded'>Error: {errorDetails}</div>;
     }
 
@@ -104,7 +100,7 @@ const AdminTrackingUpdatePage = () => {
         <div className="max-w-6xl mx-auto text-gray-900 dark:text-gray-100">
             <Helmet><title>Update Tracking | Admin</title></Helmet>
             
-            {/* Header and Back Button */}
+            {/*Header and back Button */}
             <div className="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-4 mb-6">
                 <h1 className="text-xl! sm:text-3xl! font-bold">
                     Update Tracking: <span className="text-blue-600! dark:text-blue-400!">{shipment?.trackingNumber}</span>
@@ -119,14 +115,14 @@ const AdminTrackingUpdatePage = () => {
             
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 
-                {/* 1. Add New Event Form (2/3 width) */}
+                {/*New Event Form (2/3 width) */}
                 <div className="lg:col-span-2 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl h-fit">
                     <h2 className="text-xl font-bold mb-4 border-b pb-3 dark:border-gray-700">Add New Tracking Event</h2>
 
                     {errorAdd && <div className='bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 p-3 rounded mb-4'>{errorAdd}</div>}
 
                     <form onSubmit={submitHandler} className="space-y-4">
-                        {/* Status Select */}
+                        {/*Status Select */}
                         <div>
                             <label htmlFor="status" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Status Description</label>
                             <select id="status" required value={status} onChange={(e) => setStatus(e.target.value)}
@@ -138,7 +134,7 @@ const AdminTrackingUpdatePage = () => {
                             </select>
                         </div>
                         
-                        {/* Location */}
+                        {/*Location */}
                         <div>
                             <label htmlFor="location" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Location (City, Country)</label>
                             <input type="text" id="location" required value={location} onChange={(e) => setLocation(e.target.value)}
@@ -147,7 +143,7 @@ const AdminTrackingUpdatePage = () => {
                             />
                         </div>
 
-                        {/* Details/Notes */}
+                        {/*Details/Notes */}
                         <div>
                             <label htmlFor="details" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Details/Notes (Optional)</label>
                             <textarea id="details" rows="2" value={details} onChange={(e) => setDetails(e.target.value)}
@@ -156,10 +152,10 @@ const AdminTrackingUpdatePage = () => {
                             ></textarea>
                         </div>
 
-                        {/* Submit */}
+                        {/*submit */}
                         <button
                             type="submit"
-                            disabled={loadingAdd || !status || !location} // Use Redux loadingAdd
+                            disabled={loadingAdd || !status || !location} // Using Redux loadingAdd
                             className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 transition"
                         >
                             <FontAwesomeIcon icon={faPlus} className="mr-2" /> 
@@ -168,7 +164,7 @@ const AdminTrackingUpdatePage = () => {
                     </form>
                 </div>
                 
-                {/* 2. Tracking Timeline (1/3 width) */}
+                {/*tracking timeline (1/3 width) */}
                 <div className="lg:col-span-1 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl">
                     <h2 className="text-xl font-bold mb-4 border-b pb-3 dark:border-gray-700">Tracking Timeline</h2>
                     

@@ -1,5 +1,3 @@
-// client/src/redux/actions/quoteActions.js
-
 import axios from 'axios';
 import {
     QUOTE_LIST_REQUEST,
@@ -31,7 +29,6 @@ export const listQuoteRequests = () => async (dispatch, getState) => {
             },
         };
 
-        // NOTE: You must implement the GET /api/admin/quotes route first
         const { data } = await axios.get(`${API_BASE}/admin/quotes`, config);
 
         dispatch({
@@ -50,7 +47,7 @@ export const listQuoteRequests = () => async (dispatch, getState) => {
         }
 };
 
-// @desc    Get single quote request details
+//Getting single quote request details
 export const getQuoteDetails = (id) => async (dispatch, getState) => {
     try {
         dispatch({ type: QUOTE_DETAILS_REQUEST });
@@ -80,7 +77,7 @@ export const getQuoteDetails = (id) => async (dispatch, getState) => {
 };
 
 
-// @desc    Mark a quote request as processed
+//mark a quote request as processed
 export const updateQuoteStatus = (quoteId) => async (dispatch, getState) => {
     try {
         dispatch({ type: QUOTE_UPDATE_STATUS_REQUEST });
@@ -102,7 +99,7 @@ export const updateQuoteStatus = (quoteId) => async (dispatch, getState) => {
             payload: data,
         });
 
-        // Optional: Dispatch success to the details reducer to instantly update the page state
+        //Dispatch success to the details reducer to instantly update the page state - optional though
         dispatch({ type: QUOTE_DETAILS_SUCCESS, payload: data.quote }); 
 
     } catch (error) {

@@ -1,5 +1,3 @@
-// server/models/RateTariff.js
-
 const mongoose = require('mongoose');
 
 const RateTariffSchema = new mongoose.Schema({

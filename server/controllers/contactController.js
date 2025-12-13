@@ -1,4 +1,3 @@
-// server/controllers/contactController.js
 const QuoteRequest = require('../models/QuoteRequest');
 const nodemailer = require('nodemailer');
 

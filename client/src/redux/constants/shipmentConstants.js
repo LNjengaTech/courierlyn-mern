@@ -1,35 +1,33 @@
-// client/src/redux/constants/shipmentConstants.js
-
-// Shipment List (Admin)
+//shipment List (Admin)
 export const SHIPMENT_LIST_REQUEST = 'SHIPMENT_LIST_REQUEST';
 export const SHIPMENT_LIST_SUCCESS = 'SHIPMENT_LIST_SUCCESS';
 export const SHIPMENT_LIST_FAIL = 'SHIPMENT_LIST_FAIL';
 
-// Shipment Create (Admin)
+//Shipment Create (Admin)
 export const SHIPMENT_CREATE_REQUEST = 'SHIPMENT_CREATE_REQUEST';
 export const SHIPMENT_CREATE_SUCCESS = 'SHIPMENT_CREATE_SUCCESS';
 export const SHIPMENT_CREATE_FAIL = 'SHIPMENT_CREATE_FAIL';
 export const SHIPMENT_CREATE_RESET = 'SHIPMENT_CREATE_RESET';
 
-// Tracking Event Add (Admin)
+//tracking Event Add (Admin)
 export const TRACKING_ADD_REQUEST = 'TRACKING_ADD_REQUEST';
 export const TRACKING_ADD_SUCCESS = 'TRACKING_ADD_SUCCESS';
 export const TRACKING_ADD_FAIL = 'TRACKING_ADD_FAIL';
 export const TRACKING_ADD_RESET = 'TRACKING_ADD_RESET';
 
-// Public Tracking Details (Frontend)
+//Public tracking details (Frontend)
 export const TRACKING_DETAILS_REQUEST = 'TRACKING_DETAILS_REQUEST';
 export const TRACKING_DETAILS_SUCCESS = 'TRACKING_DETAILS_SUCCESS';
 export const TRACKING_DETAILS_FAIL = 'TRACKING_DETAILS_FAIL';
 export const TRACKING_DETAILS_RESET = 'TRACKING_DETAILS_RESET';
 
-// Shipment Details by ID (Admin)
+//Shipment details by ID (Admin)
 export const SHIPMENT_DETAILS_ADMIN_REQUEST = 'SHIPMENT_DETAILS_ADMIN_REQUEST';
 export const SHIPMENT_DETAILS_ADMIN_SUCCESS = 'SHIPMENT_DETAILS_ADMIN_SUCCESS';
 export const SHIPMENT_DETAILS_ADMIN_FAIL = 'SHIPMENT_DETAILS_ADMIN_FAIL';
 export const SHIPMENT_DETAILS_ADMIN_RESET = 'SHIPMENT_DETAILS_ADMIN_RESET';
 
-// Shipment List (user)
+//user
 export const USER_SHIPMENT_LIST_REQUEST = 'USER_SHIPMENT_LIST_REQUEST';
 export const USER_SHIPMENT_LIST_SUCCESS = 'USER_SHIPMENT_LIST_SUCCESS';
 export const USER_SHIPMENT_LIST_FAIL = 'USER_SHIPMENT_LIST_FAIL';

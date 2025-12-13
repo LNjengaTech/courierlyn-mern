@@ -1,11 +1,9 @@
-// client/src/pages/AdminRateTariffPage.jsx - Tailwind Styled
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEdit, faTrash, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios'; // Direct Axios call for simplicity in admin panel placeholders
+import axios from 'axios'; //direct axios call for simplicity in admin panel placeholders
 
 
 const AdminRateTariffPage = () => {
@@ -15,13 +13,13 @@ const AdminRateTariffPage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     
-    // NOTE: In a real Redux app, this data would also be managed by Redux.
-    // Using simple fetch here to demonstrate immediate admin functionality.
+    // this data should be managed by Redux but for now...
+    //using simple fetch here to demonstrate immediate admin functionality.
 
     useEffect(() => {
         const fetchTariffs = async () => {
             try {
-                // Get JWT token from local storage (assuming userLogin state is mirrored here)
+                //get JWT token from local storage
                 const userInfo = JSON.parse(localStorage.getItem('userInfo'));
                 if (!userInfo || !userInfo.token) {
                     throw new Error("Admin token not found.");
@@ -47,8 +45,8 @@ const AdminRateTariffPage = () => {
 
     const navigate = useNavigate();
     
-    // Placeholder handlers
-    const deleteHandler = () => { /* implement logic */ };
+    //placeholder handlers
+    const deleteHandler = () => { /*implement logic later*/ };
     const editHandler = (id) => { navigate(`/admin/rates/${id}/edit`); };
 
     return (

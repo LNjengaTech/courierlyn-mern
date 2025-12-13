@@ -1,12 +1,10 @@
-// client/src/components/Header.jsx - Dark Mode Aware
-
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCaretDown, faSignOutAlt, faTimes, faBars } from '@fortawesome/free-solid-svg-icons';
 import { logout } from '../redux/actions/userActions';
-import logolyn from '../assets/logolyn-removebg-preview.png'
+import logo from '../assets/lyn-logo-(light).png'
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -32,15 +30,15 @@ const Header = () => {
     ];
 
     return (
-        <header className='bg-white! dark:bg-gray-900! shadow-md! sticky top-0! z-50 transition duration-300'>
+        <header className='bg-white/90 backdrop-blur-sm duration-300bg-white! py-4! dark:bg-gray-900! shadow-md! sticky top-0! z-50 transition duration-300'>
             <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
                 <div className='flex justify-between items-center h-16'>
-                    {/* Logo - Left Side */}
+                    {/*logo*/}
                     <Link to='/' className='text-2xl font-bold text-blue-700! dark:text-blue-400! tracking-wide'>
-                        <img src={logolyn} alt="logo" className='w-auto h-14'/>
+                        <img src={logo} alt="logo" className='w-30 h-10'/>
                     </Link>
 
-                    {/* Desktop Navigation - Center */}
+                    {/*desktop Navigation*/}
                     <nav className='hidden md:flex space-x-8'>
                         {navLinks.map(link => (
                             <Link key={link.name} to={link.path} 
@@ -51,7 +49,7 @@ const Header = () => {
                         ))}
                     </nav>
 
-                    {/* User Icon/Dropdown & Mobile Menu Button - Right Side */}
+                    {/* User Icon/Dropdown & Mobile Menu Button*/}
                     <div className='flex items-center space-x-4'>
                         {/* User Menu */}
                         {userInfo ? (
@@ -65,7 +63,7 @@ const Header = () => {
                                     <FontAwesomeIcon icon={faCaretDown} className='ml-1 text-sm' />
                                 </button>
 
-                                {/* Dropdown Content */}
+                                {/*Dropdown Content */}
                                 {dropdownOpen && (
                                     <div className='absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg py-1 z-50'>
                                         {userInfo.isAdmin ? (
@@ -96,7 +94,7 @@ const Header = () => {
                             </Link>
                         )}
                         
-                        {/* Mobile Menu Button */}
+                        {/*Mobile Menu Button */}
                         <button 
                             className='md:hidden p-2 text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-100'
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

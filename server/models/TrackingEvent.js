@@ -1,5 +1,3 @@
-// server/models/TrackingEvent.js
-
 const mongoose = require('mongoose');
 
 const trackingEventSchema = new mongoose.Schema({

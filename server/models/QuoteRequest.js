@@ -1,5 +1,3 @@
-// server/models/QuoteRequest.js
-
 const mongoose = require('mongoose');
 
 const quoteRequestSchema = mongoose.Schema(

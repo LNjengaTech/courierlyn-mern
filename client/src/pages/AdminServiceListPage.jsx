@@ -1,5 +1,3 @@
-// client/src/pages/AdminServiceListPage.jsx - Tailwind Styled
-
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,8 +13,7 @@ const AdminServiceListPage = () => {
     const serviceList = useSelector(state => state.serviceList);
     const { loading, error, services } = serviceList;
     
-    // NOTE: In a real system, you would need separate actions for AdminServiceList and Delete/Create success
-    // For now, we reuse listServices (which fetches ALL services as per the backend admin route)
+    //I need separate actions for AdminServiceList and Delete/Create success. for now, i reuse listServices (which fetches ALL services)
 
     useEffect(() => {
         dispatch(listServices());
@@ -26,11 +23,11 @@ const AdminServiceListPage = () => {
     const deleteHandler = (id) => {
         if (window.confirm('Are you sure you want to delete this service?')) {
             console.log(`Deleting service with ID: ${id}`);
-            // dispatch(deleteService(id)); // Implement this action later
+            // dispatch(deleteService(id)); //this action should to be implemented laterr
         }
     };
     
-    // Placeholder for edit navigation
+    //placeholder for edit navigation
     const editHandler = (id) => {
         navigate(`/admin/services/${id}/edit`);
     };

@@ -1,5 +1,3 @@
-// client/src/redux/reducers/adminReducers.js
-
 import {
     DASHBOARD_STATS_REQUEST,
     DASHBOARD_STATS_SUCCESS,

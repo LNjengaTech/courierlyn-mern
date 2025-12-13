@@ -1,22 +1,19 @@
-// client/src/redux/actions/serviceActions.js
-
 import axios from 'axios';
 import { 
     SERVICE_LIST_REQUEST,
     SERVICE_LIST_SUCCESS,
     SERVICE_LIST_FAIL,
 
-    // SERVICE DETAILS (for editing)
+    //for editing
     SERVICE_DETAILS_REQUEST,
     SERVICE_DETAILS_SUCCESS,
     SERVICE_DETAILS_FAIL,
 
-// SERVICE DELETE
     SERVICE_DELETE_REQUEST,
     SERVICE_DELETE_SUCCESS,
     SERVICE_DELETE_FAIL,
 
-// SERVICE CREATE/UPDATE (We often combine the constants for simplicity)
+    //combined the constants for simplicity
     SERVICE_SAVE_REQUEST,
     SERVICE_SAVE_SUCCESS,
     SERVICE_SAVE_FAIL,
@@ -27,14 +24,14 @@ import {
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 
-// ----------------------
+// ----------------------------------
 // GET ALL PUBLIC SERVICES
 // ----------------------
 export const listServices = () => async (dispatch) => {
     try {
         dispatch({ type: SERVICE_LIST_REQUEST });
 
-        // This is a public route, no token required
+        //public route, no token required
         const { data } = await axios.get(`${API_BASE}/services`);
 
         dispatch({
@@ -66,8 +63,8 @@ const getConfig = (getState) => {
     };
 };
 
-// ----------------------
-// GET SINGLE SERVICE DETAILS (for Edit Form population)
+// -------------------------------------
+// get single detail for Edit Form population
 // ----------------------
 export const getServiceDetails = (id) => async (dispatch) => {
     try {
@@ -89,7 +86,7 @@ export const getServiceDetails = (id) => async (dispatch) => {
 };
 
 // ----------------------
-// CREATE OR UPDATE SERVICE (SAVE)
+// CREATE or UPDATE service(save)
 // ----------------------
 export const saveService = (service) => async (dispatch, getState) => {
     try {
@@ -107,7 +104,7 @@ export const saveService = (service) => async (dispatch, getState) => {
         
         // Check if service._id exists (Edit/Update) or is new (Create)
         if (service._id) {
-            // PUT request to update
+            // PUT req to update
             const response = await axios.put(`${API_BASE}/admin/services/${service._id}`, service, config);
             data = response.data;
         } else {
@@ -130,7 +127,7 @@ export const saveService = (service) => async (dispatch, getState) => {
 };
 
 // ----------------------
-// DELETE SERVICE
+// DELETE service
 // ----------------------
 export const deleteService = (id) => async (dispatch, getState) => {
     try {
@@ -156,7 +153,7 @@ export const deleteService = (id) => async (dispatch, getState) => {
 };
 
 // ----------------------
-// RESET SERVICE SAVE STATE
+// RESET service state save
 // ----------------------
 export const resetServiceSave = () => (dispatch) => {
     dispatch({ type: SERVICE_SAVE_RESET });

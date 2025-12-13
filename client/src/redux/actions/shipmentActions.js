@@ -12,7 +12,7 @@ import {
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
-// Utility function to get Admin Auth config
+//utility function to get Admin Auth config
 const getConfig = (getState) => {
     const { userLogin: { userInfo } } = getState();
     return {
@@ -23,9 +23,9 @@ const getConfig = (getState) => {
     };
 };
 
-// --- ADMIN ACTIONS ---
+//-------------ADMIN ACTIONS-----
 
-// @desc    List all shipments (Admin)
+//list all shipments(Admin)
 export const listShipments = () => async (dispatch, getState) => {
     try {
         dispatch({ type: SHIPMENT_LIST_REQUEST });
@@ -44,7 +44,7 @@ export const listShipments = () => async (dispatch, getState) => {
     }
 };
 
-// @desc    Get shipment details by MongoDB ID (Admin)
+//Get shipment details by MongoDB ID(Admin)
 export const getShipmentDetailsAdmin = (shipmentId) => async (dispatch, getState) => {
     try {
         dispatch({ type: SHIPMENT_DETAILS_ADMIN_REQUEST });
@@ -52,12 +52,12 @@ export const getShipmentDetailsAdmin = (shipmentId) => async (dispatch, getState
         // Get the configuration with JWT token
         const config = getConfig(getState);
 
-        // Calls the new admin route /api/admin/shipments/:id
+        // Calls the admin route /api/admin/shipments/:id
         const { data } = await axios.get(
             `${API_BASE}/admin/shipments/${shipmentId}`,
             {
                 ...config,
-                // Tells Axios to treat 200 and 304 as successful status codes
+                // Tells axios to treat 200 and 304 as successful status codes
                 validateStatus: (status) => {
                     return status >= 200 && status < 300 || status === 304; 
                 },
@@ -77,7 +77,7 @@ export const getShipmentDetailsAdmin = (shipmentId) => async (dispatch, getState
     }
 };
 
-// @desc    Create a new Shipment (Admin)
+//create a new Shipment (Admin)
 export const createShipment = (shipment) => async (dispatch, getState) => {
     try {
         dispatch({ type: SHIPMENT_CREATE_REQUEST });
@@ -101,7 +101,7 @@ export const createShipment = (shipment) => async (dispatch, getState) => {
     }
 };
 
-// @desc    Add a tracking event to a shipment (Admin)
+//add a tracking event to a shipment (Admin)
 export const addTrackingEvent = (shipmentId, eventData) => async (dispatch, getState) => {
     try {
         dispatch({ type: TRACKING_ADD_REQUEST });
@@ -125,9 +125,8 @@ export const addTrackingEvent = (shipmentId, eventData) => async (dispatch, getS
     }
 };
 
-// --- PUBLIC ACTIONS ---
-
-// @desc    Get tracking details by tracking number (Public)
+// ---PUBLIC ACTIONS -----------
+// get tracking details by tracking number (Public)
 export const getTrackingDetails = (trackingNumber) => async (dispatch) => {
     try {
         dispatch({ type: TRACKING_DETAILS_REQUEST });
@@ -147,8 +146,8 @@ export const getTrackingDetails = (trackingNumber) => async (dispatch) => {
     }
 };
 
-// @desc    Get user's shipments list (Customer Dashboard)
-// @access  Private (Requires token)
+//Get user's shipments list (Customer Dashboard)
+//Private (Requires token)
 export const listUserShipments = () => async (dispatch, getState) => {
     try {
         dispatch({ type: USER_SHIPMENT_LIST_REQUEST });

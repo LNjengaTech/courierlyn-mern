@@ -1,4 +1,3 @@
-// server/controllers/shipmentController.js (Create this new file or update existing)
 const Shipment = require('../models/Shipment');
 
 // @desc    Get all shipments belonging to the logged-in user

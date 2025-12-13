@@ -1,5 +1,3 @@
-// client/src/pages/AdminQuoteListPage.jsx
-
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -20,12 +18,11 @@ const AdminQuoteListPage = ({ history }) => {
         if (userInfo && userInfo.isAdmin) {
             dispatch(listQuoteRequests());
         } else {
-            // Redirect if not admin
-            history.push('/login'); // If using older router, otherwise use useNavigate hook
+            history.push('/login'); //if using older router, otherwise use useNavigate hook
         }
     }, [dispatch, userInfo, history]);
     
-    // Helper function for status chip
+    //Helper function for status chip
     const getStatusChip = (isProcessed) => {
         const base = "px-3 py-1 text-xs font-semibold rounded-full";
         if (isProcessed) {

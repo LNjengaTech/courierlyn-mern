@@ -21,25 +21,24 @@ import AdminShipmentForm from './components/AdminShipmentForm';
 import AdminTrackingUpdatePage from './pages/AdminTrackingUpdatePage';
 import AdminQuoteListPage from './pages/AdminQuoteListPage';
 import AdminQuoteDetailsPage from './pages/AdminQuoteDetailsPage'
-// import AdminDashboardPage from './pages/AdminDashboardPage'; // To be added later
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* PUBLIC ROUTES (Uses UserLayout) */}
+        {/* PUBLIC ROUTES(uses UserLayout) */}
         <Route path='/' element={<UserLayout><HomePage /></UserLayout>} />
         <Route path='/tracking/:trackingNumber?' element={<UserLayout><TrackingPage /></UserLayout>} />
         <Route path='/services' element={<UserLayout><ServicesPage /></UserLayout>} />
         <Route path='/contact' element={<UserLayout><ContactPage /></UserLayout>} />
 
-        {/* We keep login/register simple outside the main layout for focused UX */}
+        {/*keeping login/register simple outside the main layout for focused UX */}
         <Route path='/login' element={<LoginPage />} />
         <Route path='/register' element={<RegisterPage />} /> 
 
         {/* PROTECTED CUSTOMER ROUTES (Uses ProtectedRoute + UserLayout) */}
         <Route path='/account/dashboard' element={<ProtectedRoute><UserLayout><CustomerDashboardPage /></UserLayout></ProtectedRoute>} />
-        {/* ...other customer routes (e.g., /account/shipments, /account/settings) */}
+
 
         {/* PROTECTED ADMIN ROUTES (Uses ProtectedRoute + AdminLayout) */}
         <Route path='/admin/dashboard' element={<ProtectedRoute isAdmin={true}><AdminLayout><AdminDashboardPage /></AdminLayout></ProtectedRoute>} />
@@ -52,7 +51,6 @@ function App() {
         <Route path='/admin/rates/create' element={<ProtectedRoute isAdmin={true}><AdminLayout><RateTariffForm /></AdminLayout></ProtectedRoute>} />
         <Route path='/admin/rates/:id/edit' element={<ProtectedRoute isAdmin={true}><AdminLayout><RateTariffForm /></AdminLayout></ProtectedRoute>} />
 
-        {/* Shipment Management Routes */}
         <Route path='/admin/shipments' element={<ProtectedRoute isAdmin={true}><AdminLayout><AdminShipmentListPage /></AdminLayout></ProtectedRoute>} />
         <Route path='/admin/shipments/create' element={<ProtectedRoute isAdmin={true}><AdminLayout><AdminShipmentForm /></AdminLayout></ProtectedRoute>} />
         <Route path='/admin/shipments/:id/track' element={<ProtectedRoute isAdmin={true}><AdminLayout><AdminTrackingUpdatePage /></AdminLayout></ProtectedRoute>} />
@@ -64,7 +62,7 @@ function App() {
         
         {/* 404 Route */}
         <Route path='*' element={<UserLayout>
-          <h1 className="text-4xl text-center py-20 text-red-600 dark:text-red-400">404 Page Not Found</h1>
+          <h1 className="text-2xl! text-center! py-20! text-red-600 dark:text-red-400">404 Page Not Found.</h1>
           
           </UserLayout>} />
       </Routes>

@@ -1,5 +1,3 @@
-// server/routes/rateRoutes.js
-
 const express = require('express');
 const router = express.Router();
 const { calculateRate } = require('../controllers/adminController');

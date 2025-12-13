@@ -1,11 +1,10 @@
-// client/src/pages/HomePage.jsx - Tailwind Styled
-
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import RateCalculator from '../components/RateCalculator'; // Import the calculator
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faLock, faGlobe } from '@fortawesome/free-solid-svg-icons';
+
 
 import { ReactTyped } from 'react-typed';
 
@@ -20,24 +19,28 @@ const HomePage = () => {
 
     return (
         <div className="bg-gray-50 dark:bg-gray-900 transition duration-300 overflow-x-hidden">
-            <Helmet><title>Courierlyn - Global Logistics Partner</title></Helmet>
+            {/*using HELMET to set the unique page props  */}
+            <Helmet>
+                <title>Courierlyn: Fast Global and Local Shipping & Parcel Delivery Services</title>
+                <meta name="description" content="The most reliable partner for international freight and domestic parcel delivery. View real-time tracking, request a quote, and manage all your global logistics needs with Courierlyn." />
+                <meta name="keywords" content="international freight, cargo shipping, FCL, LCL, air freight quotes, customs brokerage, fast parcel delivery, logistics partner" />
+            </Helmet>
 
-            {/* 1. Hero Section: Calculator and Headline */}
+            {/*Hero section*/}
             <div className="relative pt-10 pb-20 sm:pt-16 lg:pt-24 lg:pb-32">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="lg:grid lg:grid-cols-12 lg:gap-8">
-                        {/* Hero Text - Left Side */}
                         <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
                             <h1 className="mt-4 h-20! md:h-28! text-4xl! md:text-5xl! tracking-tight font-extrabold text-gray-900 dark:text-gray-100 sm:mt-5 sm:text-6xl lg:mt-6 xl:text-7xl">
                                 
-                                {/* 2. Implement the Typing Effect */}
+                                {/*typing effect*/}
                                 <ReactTyped
                                     strings={typingPhrases} // The array of strings to type
-                                    typeSpeed={40}       // Speed of typing (ms per character)
-                                    backSpeed={50}       // Speed of deleting (ms per character)
-                                    loop={true}          // Loop indefinitely
-                                    backDelay={2000}     // Pause before deleting (2 seconds)
-                                    className="block text-blue-600 dark:text-blue-400" // Apply color class
+                                    typeSpeed={40}          // Speed of typing
+                                    backSpeed={50}          // Speed of deleting(ms/character)
+                                    loop={true}             // Loop indefinitely
+                                    backDelay={3000}        // pause before deleting
+                                    className="block text-blue-600 dark:text-blue-400"
                                 />
                                 
                             </h1>
@@ -55,7 +58,7 @@ const HomePage = () => {
                             </div>
                         </div>
 
-                        {/* Rate Calculator - Right Side */}
+                        {/*rendering Rate Calculator*/}
                         <div className="mt-12 lg:mt-0 lg:col-span-6">
                             <RateCalculator />
                         </div>
@@ -63,7 +66,7 @@ const HomePage = () => {
                 </div>
             </div>
 
-            {/* 2. Feature Icons Section */}
+            {/*feature icons section */}
             <div className="py-16 bg-white dark:bg-gray-800">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -74,7 +77,7 @@ const HomePage = () => {
                 </div>
             </div>
 
-            {/* 3. CTA for Services Page */}
+            {/*CTA for Services Page */}
             <div className="py-20 text-center bg-gray-50 dark:bg-gray-900">
                 <h2 className="text-3xl font-extrabold text-gray-900 dark:text-gray-100 sm:text-4xl">
                     Need a Custom Logistics Plan?
@@ -89,6 +92,8 @@ const HomePage = () => {
         </div>
     );
 };
+
+
 
 const FeatureCard = ({ icon, title, description }) => (
     <div className="text-center p-6 bg-gray-100 dark:bg-gray-700 rounded-lg">

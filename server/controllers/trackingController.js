@@ -1,5 +1,3 @@
-// server/controllers/trackingController.js
-
 const Shipment = require('../models/Shipment');
 const TrackingEvent = require('../models/TrackingEvent');
 

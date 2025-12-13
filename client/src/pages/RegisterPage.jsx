@@ -1,5 +1,3 @@
-// client/src/pages/RegisterPage.jsx
-
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
@@ -13,7 +11,7 @@ const RegisterPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [message, setMessage] = useState(null); // For custom messages like password mismatch
+    const [message, setMessage] = useState(null); //For the custom messages like password mismatch
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -23,7 +21,6 @@ const RegisterPage = () => {
 
     useEffect(() => {
         if (userInfo) {
-            // Redirect after successful registration/login
             navigate('/account/dashboard'); 
         }
     }, [navigate, userInfo]);
@@ -35,7 +32,7 @@ const RegisterPage = () => {
         if (password !== confirmPassword) {
             setMessage('Passwords do not match');
         } else {
-            // Dispatch the register action
+            //dispatch the register action
             dispatch(register(name, email, password));
         }
     };
@@ -54,7 +51,7 @@ const RegisterPage = () => {
             <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
                 <div className='bg-white dark:bg-gray-800 py-8 px-4 shadow-xl rounded-lg sm:px-10'>
                     
-                    {/* Feedback Messages */}
+                    {/*feedback messages */}
                     {message && (
                         <div className='bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative mb-4 text-sm' role='alert'>
                             <span className='block sm:inline'>{message}</span>
@@ -67,7 +64,7 @@ const RegisterPage = () => {
                     )}
 
                     <form className='space-y-6' onSubmit={submitHandler}>
-                        {/* Name Input */}
+                        {/*name*/}
                         <div>
                             <label htmlFor='name' className='block text-sm font-medium text-gray-700 dark:text-gray-300'>Full Name</label>
                             <div className='mt-1'>
@@ -77,7 +74,7 @@ const RegisterPage = () => {
                             </div>
                         </div>
 
-                        {/* Email Input */}
+                        {/*email*/}
                         <div>
                             <label htmlFor='email' className='block text-sm font-medium text-gray-700 dark:text-gray-300'>Email Address</label>
                             <div className='mt-1'>
@@ -87,7 +84,7 @@ const RegisterPage = () => {
                             </div>
                         </div>
 
-                        {/* Password Input */}
+                        {/*password*/}
                         <div>
                             <label htmlFor='password' className='block text-sm font-medium text-gray-700 dark:text-gray-300'>Password</label>
                             <div className='mt-1'>
@@ -97,7 +94,7 @@ const RegisterPage = () => {
                             </div>
                         </div>
                         
-                        {/* Confirm Password Input */}
+                        {/*password confirmation*/}
                         <div>
                             <label htmlFor='confirm-password' className='block text-sm font-medium text-gray-700 dark:text-gray-300'>Confirm Password</label>
                             <div className='mt-1'>

@@ -1,5 +1,3 @@
-// client/src/redux/reducers/rateReducers.js
-
 import { 
     RATE_CALCULATE_REQUEST, RATE_CALCULATE_SUCCESS, RATE_CALCULATE_FAIL, RATE_CALCULATE_RESET 
 } from '../constants/rateConstants';

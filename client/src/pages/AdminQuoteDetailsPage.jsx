@@ -1,5 +1,3 @@
-// client/src/pages/AdminQuoteDetailsPage.jsx
-
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
@@ -20,7 +18,7 @@ const DetailItem = ({ icon, label, value }) => (
 
 const AdminQuoteDetailsPage = () => {
     const dispatch = useDispatch();
-    const { id } = useParams(); // Get ID from URL
+    const { id } = useParams(); //Get the ID from url
 
     const quoteDetails = useSelector((state) => state.quoteDetails);
     const { loading, error, quote } = quoteDetails;
@@ -29,12 +27,12 @@ const AdminQuoteDetailsPage = () => {
     const { loading: loadingUpdate, success: successUpdate, error: errorUpdate } = quoteUpdateStatus;
 
     useEffect(() => {
-        // If the update was successful, refresh the details and reset the update state
+        // if the update was successful, refresh the details and reset the update state
         if (successUpdate) {
-            dispatch(resetUpdateQuoteStatus); // Clear the success flag
-            dispatch(getQuoteDetails(id)); // Re-fetch the updated quote data
+            dispatch(resetUpdateQuoteStatus); //clearing the success flag
+            dispatch(getQuoteDetails(id)); //re-fetch the updated quote data
         } else {
-            // Fetch quote details on mount
+            //Fetch quote details on mount
             dispatch(getQuoteDetails(id));
         }
     }, [dispatch, id, successUpdate]);
@@ -74,7 +72,7 @@ const AdminQuoteDetailsPage = () => {
                     </header>
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        {/* 1. Customer Information (Left Column) */}
+                        {/*customer info*/}
                         <div className="lg:col-span-1 space-y-4 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg h-full">
                             <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">Customer Details</h2>
                             <DetailItem icon={faUser} label="Name" value={quote.name} />
@@ -84,27 +82,27 @@ const AdminQuoteDetailsPage = () => {
                             <p className="text-xs text-gray-500 dark:text-gray-400 pt-2">Submitted: {new Date(quote.createdAt).toLocaleString()}</p>
                         </div>
 
-                        {/* 2. Shipment Details & Action (Right Column) */}
+                        {/* shipment details & action*/}
                         <div className="lg:col-span-2 space-y-6 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
                             <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">Shipment Details</h2>
                             
-                            {/* Route & Category */}
+                            {/* route & category */}
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <DetailItem icon={faTruckMoving} label="Ship From" value={quote.shipFrom} />
                                 <DetailItem icon={faTruckMoving} label="Ship To" value={quote.shipTo} />
                                 <DetailItem icon={faQuoteLeft} label="Category" value={quote.category} />
                             </div>
 
-                            {/* Description (Full width) */}
+                            {/*description*/}
                             <div className="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
                                 <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Description of Items</p>
                                 <p className="text-base text-gray-900 dark:text-gray-100 whitespace-pre-wrap">{quote.description}</p>
                             </div>
 
-                            {/* Action Buttons (Future feature: Mark as Processed) */}
+                            {/*Action buttons*/}
                             <div className="pt-4 border-t dark:border-gray-700">
                                 <button
-                                    onClick={handleProcessQuote} // To be implemented next
+                                    onClick={handleProcessQuote}
                                     disabled={quote.isProcessed}
                                     className={`px-6 py-3 font-semibold rounded-md transition ${quote.isProcessed
                                         ? 'bg-gray-400! text-gray-700! dark:bg-gray-600! dark:text-gray-300! cursor-not-allowed'

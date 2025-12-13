@@ -1,4 +1,3 @@
-// client/src/redux/actions/userActions.js
 // client-side functions that communicate with the Express endpoints (/api/users/register & /api/users/login), handle the promise, and dispatch the correct Redux actions.
 
 import axios from 'axios';
@@ -8,13 +7,10 @@ import {
     USER_LIST_REQUEST, USER_LIST_SUCCESS, USER_LIST_FAIL, USER_LIST_RESET,
 } from '../constants/userConstants';
 
-// Base URL for the Express API
+//Base URL for the Express API
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
-
-// ----------------------
-// LOGIN ACTION
-// ----------------------
+//login action
 export const login = (email, password) => async (dispatch) => {
     try {
         dispatch({
@@ -54,18 +50,14 @@ export const login = (email, password) => async (dispatch) => {
     }
 };
 
-// ----------------------
-// LOGOUT ACTION
-// ----------------------
+//logout
 export const logout = () => (dispatch) => {
     localStorage.removeItem('userInfo');
     dispatch({ type: USER_LOGOUT });
     // You might want to clear other states here (e.g., shipments, services)
 };
 
-// ----------------------
-// REGISTER ACTION
-// ----------------------
+//Reg. action
 export const register = (name, email, password) => async (dispatch) => {
     try {
         dispatch({
@@ -78,7 +70,7 @@ export const register = (name, email, password) => async (dispatch) => {
             },
         };
 
-        // Call the Express Register API endpoint
+        //Call the Express Register API endpoint
         const { data } = await axios.post(
             `${API_BASE}/users/register`,
             { name, email, password },
@@ -90,7 +82,7 @@ export const register = (name, email, password) => async (dispatch) => {
             payload: data,
         });
 
-        // After successful registration, log the user in immediately
+        //log the user in immediately after successful registeration
         dispatch({
             type: USER_LOGIN_SUCCESS,
             payload: data,
@@ -121,8 +113,7 @@ const getConfig = (getState) => {
     };
 };
 
-// @desc    Get all users (Admin only)
-// @route   GET /api/admin/users
+//Get all users (Admin only)
 export const listUsers = () => async (dispatch, getState) => {
     try {
         dispatch({ type: USER_LIST_REQUEST });

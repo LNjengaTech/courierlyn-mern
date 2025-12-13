@@ -1,5 +1,3 @@
-// client/src/redux/constants/contactConstants.js (New File)
-
 export const CONTACT_SUBMISSION_REQUEST = 'CONTACT_SUBMISSION_REQUEST';
 export const CONTACT_SUBMISSION_SUCCESS = 'CONTACT_SUBMISSION_SUCCESS';
 export const CONTACT_SUBMISSION_FAIL = 'CONTACT_SUBMISSION_FAIL';

@@ -1,5 +1,3 @@
-// client/src/redux/constants/adminConstants.js
-
 export const DASHBOARD_STATS_REQUEST = 'DASHBOARD_STATS_REQUEST';
 export const DASHBOARD_STATS_SUCCESS = 'DASHBOARD_STATS_SUCCESS';
 export const DASHBOARD_STATS_FAIL = 'DASHBOARD_STATS_FAIL';

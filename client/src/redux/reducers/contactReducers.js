@@ -1,5 +1,3 @@
-// client/src/redux/reducers/contactReducers.js (New File)
-
 import {
     CONTACT_SUBMISSION_REQUEST,
     CONTACT_SUBMISSION_SUCCESS,
@@ -9,7 +7,7 @@ import {
 
 const contactInitialState = { 
     loading: false, 
-    success: null, // Holds success message
+    success: null, //holds success message
     error: null 
 };
 

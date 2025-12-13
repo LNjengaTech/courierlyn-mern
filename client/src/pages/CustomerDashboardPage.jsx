@@ -1,5 +1,3 @@
-// client/src/pages/CustomerDashboardPage.jsx - DYNAMIC VERSION
-
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,19 +9,19 @@ import { faTruckMoving, faExclamationTriangle, faCheckCircle, faSpinner } from '
 const CustomerDashboardPage = () => {
     const dispatch = useDispatch();
     
-    // Select user info (to show name)
+    //select user info
     const { userInfo } = useSelector(state => state.userLogin);
     
-    // Select the new shipment list state
+    //select the new shipment list state
     const userShipmentList = useSelector(state => state.userShipmentList);
     const { loading, error, shipments } = userShipmentList;
 
     useEffect(() => {
-        // Fetch the user's shipments when the component loads
+        //fetch user's shipments when component loads
         dispatch(listUserShipments());
     }, [dispatch]);
 
-    // Helper function to render status chips (you can move this outside if preferred)
+    //helper function to render status chips
     const getStatusChip = (status) => {
         const base = "px-3 py-1 text-xs font-semibold rounded-full flex items-center";
         switch (status) {
@@ -50,10 +48,10 @@ const CustomerDashboardPage = () => {
         }
     };
 
-    // Calculate dynamic counts for the summary cards
+    //calculate dynamic counts forsummary cards
     const currentShipmentsCount = shipments.filter(s => s.currentStatus !== 'DELIVERED' && s.currentStatus !== 'CANCELLED').length;
     const deliveredCount = shipments.filter(s => s.currentStatus === 'DELIVERED').length;
-    // You'll need to calculate 'Pending Quotes' based on other data, here we use a placeholder
+    //Ive used placeholder for pending quotes
     
     return (
         <div className="container mx-auto px-4 py-8 bg-white dark:bg-gray-800 shadow-lg rounded-lg my-10 text-gray-900 dark:text-gray-100">
@@ -71,7 +69,7 @@ const CustomerDashboardPage = () => {
 
             <h2 className="text-2xl font-semibold mt-10 mb-4 border-b pb-2 border-gray-200 dark:border-gray-700">Your Recent Shipments</h2>
             
-            {/* Conditional Rendering for Shipments List */}
+            {/* conditional rendering for Shipments List */}
             {loading ? (
                 <div className="text-center py-10">
                     <FontAwesomeIcon icon={faSpinner} className='animate-spin text-2xl text-blue-600' />
@@ -135,7 +133,7 @@ const CustomerDashboardPage = () => {
     );
 };
 
-// Simple reusable card component (Keep this at the bottom)
+//simple card component
 const DashboardCard = ({ title, count, color }) => (
     <div className={`p-6 rounded-lg shadow-md bg-white dark:bg-gray-700 border-l-4 border-${color}-500`}>
         <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{title}</p>

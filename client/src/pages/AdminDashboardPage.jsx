@@ -1,5 +1,3 @@
-// client/src/pages/AdminDashboardPage.jsx - Tailwind Styled
-
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,7 +9,7 @@ const AdminDashboardPage = () => {
     const dispatch = useDispatch();
     const { userInfo } = useSelector(state => state.userLogin);
 
-    // Fetch the new stats state
+    //fetch the stats state
     const dashboardStats = useSelector(state => state.dashboardStats);
     const { loading, stats, error } = dashboardStats;
 
@@ -19,7 +17,7 @@ const AdminDashboardPage = () => {
         dispatch(getDashboardStats());
     }, [dispatch]);
 
-    // Helper function to format numbers (optional)
+    //helper function for format numbers
     const formatCount = (count) => count ? count.toLocaleString() : '0';
 
     if (loading) {
@@ -39,7 +37,7 @@ const AdminDashboardPage = () => {
         );
     }
 
-    // Deconstruct the actual counts
+    //deconstructing the actual counts
     const totalShipments = stats?.shipmentStats?.total || 0;
     const pendingQuotes = stats?.quoteStats?.pending || 0;
     const totalUsers = stats?.userStats?.total || 0;
@@ -85,7 +83,7 @@ const AdminDashboardPage = () => {
     );
 };
 
-// Simple Stat Card
+//Stat Card
 const StatCard = ({ title, count, icon, color }) => (
     <div className={`bg-white! dark:bg-gray-700! p-6 rounded-lg shadow-md border-l-4 border-${color}-500`}>
         <div className="flex items-center justify-between">

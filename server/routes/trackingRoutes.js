@@ -1,5 +1,3 @@
-// server/routes/trackingRoutes.js
-
 const express = require('express');
 const router = express.Router();
 const { getTrackingDetails } = require('../controllers/trackingController');

@@ -1,10 +1,8 @@
-// client/src/pages/AdminShipmentListPage.jsx - Tailwind Styled
-
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { listShipments } from '../redux/actions/shipmentActions'; // Assume this action exists
+import { listShipments } from '../redux/actions/shipmentActions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEye, faSpinner, faTruckMoving } from '@fortawesome/free-solid-svg-icons';
 
@@ -68,7 +66,7 @@ const AdminShipmentListPage = () => {
                             </tr>
                         </thead>
                         <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                          {/* Check if shipments array is not empty before mapping */}
+                          {/*fix to the previous issue - check if shipments array is not empty before mapping */}
                             {shipments && shipments.length > 0 ? (  
                                 shipments.map((shipment) => (
                                 <tr key={shipment._id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50">

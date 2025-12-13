@@ -1,5 +1,3 @@
-// client/src/redux/actions/rateActions.js
-
 import axios from 'axios';
 import { 
     RATE_CALCULATE_REQUEST, RATE_CALCULATE_SUCCESS, RATE_CALCULATE_FAIL, RATE_CALCULATE_RESET
@@ -7,9 +5,9 @@ import {
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
-// ----------------------
+// -----------------------------------
 // CALCULATE INSTANT RATE
-// ----------------------
+// -----------------------------
 export const calculateRate = ({ origin, destination, service, weight }) => async (dispatch) => {
     try {
         dispatch({ type: RATE_CALCULATE_REQUEST });
@@ -42,9 +40,7 @@ export const calculateRate = ({ origin, destination, service, weight }) => async
     }
 };
 
-// ----------------------
-// RESET RATE CALCULATION STATE
-// ----------------------
+//reset
 export const resetRateCalculation = () => (dispatch) => {
     dispatch({ type: RATE_CALCULATE_RESET });
 };

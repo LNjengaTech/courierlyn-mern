@@ -1,5 +1,3 @@
-// client/src/redux/actions/adminActions.js
-
 import axios from 'axios';
 import {
     DASHBOARD_STATS_REQUEST,

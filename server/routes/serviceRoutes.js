@@ -1,4 +1,3 @@
-// server/routes/serviceRoutes.js
 // a separate public endpoint for the customer-facing site to fetch services.
 
 const express = require('express');

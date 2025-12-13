@@ -24,7 +24,7 @@ const VALID_SHIPMENT_STATUSES = [
 // @access  Private/Admin
 const getUsers = async (req, res) => {
     try {
-        // Fetch all users, but only select the necessary fields for listing (e.g., ID, name, email)
+        // Fetch all users, but only select the necessary fields for listing (e.g ID, name, email)
         const users = await User.find({})
             .select('_id name email isEmployee') 
             .sort({ createdAt: -1 }); // Newest users first
@@ -70,7 +70,7 @@ const createService = async (req, res) => {
             details,
             isPublished: isPublished || true,
             image: imageUrl, 
-            // Note: If you want to associate the service with the admin user: user: req.user._id,
+            //for associating the service with the admin user, --> user: req.user._id,
         });
 
         const createdService = await service.save();
@@ -141,7 +141,7 @@ const getPublicServices = async (req, res) => {
     }
 };
 
-//=========================================================================================//
+//===============================================================================//
 
 //                                 ADMIN RATES CRUD & CALCULATOR LOGIC   
 
@@ -171,20 +171,20 @@ const createTariff = async (req, res) => {
     }
 };
 
-// ... (Add updateTariff and deleteTariff similarly to the Service CRUD)
+//later...(Add updateTariff and deleteTariff similarly to the Service CRUD)
 
 // @desc    Calculate instant shipping rate
 // @route   POST /api/rates/calculate
 // @access  Public
 const calculateRate = async (req, res) => {
-    // 1. Get required parameters from client request
+    //Get required parameters from client request
     const { origin, destination, service, weight } = req.body; 
     
     if (!origin || !destination || !service || !weight || isNaN(weight)) {
         return res.status(400).json({ message: 'Missing required parameters for rate calculation.' });
     }
     try {
-        // 2. Find the matching tariff (based on active status, service, zones, and weight bracket)
+        //Find the matching tariff (based on active status, service, zones, and weight bracket)
         const tariff = await RateTariff.findOne({
             serviceType: service,
             originZone: origin,      // In a real system, these would be Zone IDs
@@ -198,10 +198,10 @@ const calculateRate = async (req, res) => {
             return res.status(404).json({ message: `No active rate found for this combination (${service}, ${origin} to ${destination}, ${weight}kg).` });
         }
 
-        // 3. Perform the calculation (Enterprise Security Requirement: Calculations must happen on the server)
+        //Perform the calculation (Enterprise Security Requirement: Calculations must happen on the server)
         const totalCost = tariff.baseCost + (tariff.costPerUnit * weight);
         
-        // 4. Return the calculated rate
+        //Return the calculated rate
         res.json({
             serviceType: service,
             calculatedRate: totalCost.toFixed(2), // Format to 2 decimal places
@@ -213,11 +213,11 @@ const calculateRate = async (req, res) => {
         res.status(500).json({ message: 'Server error during rate calculation', error: error.message });
     }
 };
-//=======================================================================================//
+//===================================================================================//
 
 //                                 SHIPMENT AND TRACKING
 
-//=======================================================================================//
+//======================================================================================//
 const generateTrackingNumber = () => {
     // Generate a unique 10-character alphanumeric ID
     return 'CLY' + Math.random().toString(36).substring(2, 11).toUpperCase(); 
@@ -248,19 +248,19 @@ const createShipment = async (req, res) => {
         const shipment = new Shipment({
             trackingNumber,
             
-            // --- Required Root Fields ---
+            // --- Required Root Fields------
             customer: userId, // Maps frontend 'userId' to schema 'customer'
             calculatedRate: calculatedRate, // **FIX: ENSURING IT IS PRESENT**
             serviceType: shipmentDetails.serviceType, // Pulls from nested object
             weight: shipmentDetails.weight, // Pulls from nested object
 
-            // --- Required Location Fields ---
+            // -------------Required Location Fields ---
             originCity: origin.city,
             originCountry: origin.country,
             destinationCity: destination.city,
             destinationCountry: destination.country,
 
-            // --- Optional/Default Fields ---
+            //--------ptional/Default Fields ---
             currentStatus: currentStatus || 'PENDING', // Uses schema default if missing
             dimensions: shipmentDetails.dimensions, 
             
@@ -271,7 +271,7 @@ const createShipment = async (req, res) => {
 
         const createdShipment = await shipment.save();
 
-        // 3. Create the first tracking event
+        //create the first tracking event
         const initialEvent = new TrackingEvent({
             shipment: createdShipment._id,
             status: 'SHIPMENT CREATED', // Use a capitalized status for consistency
@@ -324,7 +324,7 @@ const getShipmentById = async (req, res) => {
             return res.status(404).json({ message: 'Shipment not found' });
         }
 
-        // 2. Fetch all tracking events for this shipment
+        //fetch all tracking events for this shipment
         const trackingHistory = await TrackingEvent.find({ shipment: shipmentId })
             .sort({ timestamp: 1 }); // Oldest first
 
@@ -333,7 +333,6 @@ const getShipmentById = async (req, res) => {
 
     } catch (error) {
         console.error(`Error fetching shipment ${req.params.id}: ${error.message}`);
-        // Often a Mongoose CastError if the ID is malformed
         res.status(404).json({ message: 'Invalid Shipment ID or Server Error' });
     }
 };
@@ -343,26 +342,26 @@ const getShipmentById = async (req, res) => {
 // @access  Private/Admin
 const addTrackingEvent = async (req, res) => {
     const { status, location, details } = req.body;
-    const { shipmentId } = req.params; // Destructure and rename 'id' to 'shipmentId'
+    const { shipmentId } = req.params; //destructure and rename 'id' to 'shipmentId'
 
     if (!status || !location) {
         return res.status(400).json({ message: 'Status and location are required for a tracking event.' });
     }
 
     try {
-        // 1. Find the shipment
+        //find the shipment
         const shipment = await Shipment.findById(shipmentId);
 
         if (!shipment) {
             return res.status(404).json({ message: 'Shipment not found.' });
         }
         
-        // --- 2. Determine and Set the High-Level Status ---
+        // ------Determine and Set the High-Level Status ---
         
-        // A. Normalize the detailed event status (e.g., "Picked Up" -> "PICKED_UP")
+        //normalize the detailed event status (e.g., "Picked Up" -> "PICKED_UP")
         const normalizedEventStatus = status.toUpperCase().replace(/ /g, '_');
         
-        // B. Map the normalized status to a valid Shipment ENUM
+        //Map the normalized status to a valid Shipment ENUM
         let newCurrentStatus = shipment.currentStatus; // Default to current state
 
         if (normalizedEventStatus.includes('DELIVERED')) {
@@ -375,7 +374,7 @@ const addTrackingEvent = async (req, res) => {
             normalizedEventStatus.includes('DEPARTED') ||
             normalizedEventStatus.includes('PICKED_UP')
         ) {
-            // Use IN_TRANSIT for any movement status, unless the shipment is already delivered/cancelled
+            //using IN_TRANSIT for any movement status, unless the shipment is already delivered/cancelled
             if (shipment.currentStatus !== 'DELIVERED' && shipment.currentStatus !== 'CANCELLED') {
                 newCurrentStatus = 'IN_TRANSIT';
             }
@@ -385,17 +384,17 @@ const addTrackingEvent = async (req, res) => {
             newCurrentStatus = 'EXCEPTION';
         }
 
-        // C. Update the shipment status only if it's a valid enum value
+        //Update the shipment status only if it's a valid enum value
         if (VALID_SHIPMENT_STATUSES.includes(newCurrentStatus)) {
             shipment.currentStatus = newCurrentStatus;
             await shipment.save();
         } 
         // Note: If the status is not mapped to a high-level ENUM, the shipment's status remains unchanged.
 
-        // --- 3. Create and save the new detailed tracking event ---
+        // ---Create and save the new detailed tracking event ---
         const trackingEvent = new TrackingEvent({
             shipment: shipmentId,
-            status: status, // Keep the detailed string status for the timeline display
+            status: status, //Keep the detailed string status for the timeline display
             location,
             details,
         });
@@ -419,7 +418,7 @@ const addTrackingEvent = async (req, res) => {
     }
 };
 
-//=======================================================================================//
+//==================================================================================//
 
 //                                 QUOTES
 
@@ -492,11 +491,11 @@ const updateQuoteStatus = async (req, res) => {
     }
 };
 
-//=======================================================================================//
+//======================================================================================//
 
 //                                 dashboard statistics
 
-//=======================================================================================//
+//===================================================================================//
 
 // @desc    Admin fetch dashboard statistics
 // @route   GET /api/admin/stats

@@ -1,5 +1,3 @@
-// client/src/redux/reducers/quoteReducers.js
-
 import {
    QUOTE_LIST_REQUEST,
     QUOTE_LIST_SUCCESS,

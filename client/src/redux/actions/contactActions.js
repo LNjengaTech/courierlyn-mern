@@ -1,5 +1,3 @@
-// client/src/redux/actions/contactActions.js (New File)
-
 import axios from 'axios';
 import {
     CONTACT_SUBMISSION_REQUEST,
@@ -10,7 +8,7 @@ import {
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
-// @desc    Submit general email form
+//submit general email form
 export const submitContactEmail = (formData) => async (dispatch) => {
     try {
         dispatch({ type: CONTACT_SUBMISSION_REQUEST });
@@ -19,7 +17,7 @@ export const submitContactEmail = (formData) => async (dispatch) => {
 
         dispatch({
             type: CONTACT_SUBMISSION_SUCCESS,
-            payload: data.message, // Success message from server
+            payload: data.message, //success message from server
         });
     } catch (error) {
         dispatch({
@@ -31,7 +29,7 @@ export const submitContactEmail = (formData) => async (dispatch) => {
     }
 };
 
-// @desc    Submit detailed shipping quote request
+//submit detailed shipping quote request
 export const submitQuoteRequest = (formData) => async (dispatch) => {
     try {
         dispatch({ type: CONTACT_SUBMISSION_REQUEST });
@@ -40,7 +38,7 @@ export const submitQuoteRequest = (formData) => async (dispatch) => {
 
         dispatch({
             type: CONTACT_SUBMISSION_SUCCESS,
-            payload: data.message, // Success message from server
+            payload: data.message,
         });
     } catch (error) {
         dispatch({

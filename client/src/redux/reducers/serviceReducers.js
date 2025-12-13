@@ -1,5 +1,3 @@
-// client/src/redux/reducers/serviceReducers.js
-
 import { 
     SERVICE_LIST_REQUEST, SERVICE_LIST_SUCCESS, SERVICE_LIST_FAIL,
     

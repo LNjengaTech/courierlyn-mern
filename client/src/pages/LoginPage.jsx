@@ -1,5 +1,3 @@
-// client/src/pages/LoginPage.jsx - Dark Mode Aware
-
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
@@ -20,7 +18,6 @@ const LoginPage = () => {
 
     useEffect(() => {
         if (userInfo) {
-            // Determine redirect based on role
             if (userInfo.isAdmin) {
                 navigate('/admin/dashboard'); 
             } else {
@@ -51,7 +48,7 @@ const LoginPage = () => {
             <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
                 <div className='bg-white dark:bg-gray-800 py-8 px-4 shadow-xl rounded-lg sm:px-10 transition duration-300'>
                     
-                    {/* Error and Loading Feedback */}
+                    {/*error and loading Feedback */}
                     {error && (
                         <div className='bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-300 px-4 py-3 rounded relative mb-4 text-sm' role='alert'>
                             <span className='block sm:inline'>{error}</span>

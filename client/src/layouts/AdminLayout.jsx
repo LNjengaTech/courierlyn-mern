@@ -1,20 +1,18 @@
-// client/src/layouts/AdminLayout.jsx
-
-import React, { useState } from 'react'; // <-- IMPORT useState
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../redux/actions/userActions';
 import AdminSidebar from '../components/AdminSidebar'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignOutAlt, faBars } from '@fortawesome/free-solid-svg-icons'; // <-- IMPORT faBars
+import { faSignOutAlt, faBars } from '@fortawesome/free-solid-svg-icons';
 
 const AdminLayout = ({ children, title = 'Admin Dashboard | Courierlyn' }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { userInfo } = useSelector(state => state.userLogin);
 
-    // 1. Sidebar State Management
+    //sidebar state-management
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
     const closeSidebar = () => setIsSidebarOpen(false);
@@ -32,18 +30,17 @@ const AdminLayout = ({ children, title = 'Admin Dashboard | Courierlyn' }) => {
             
             <div className="flex min-h-screen bg-gray-100 dark:bg-gray-900 transition duration-300">
                 
-                {/* 1. Sidebar (Pass state and handlers) */}
+                {/*passing state and handlers) */}
                 <AdminSidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
                 
-                {/* 2. Main Content Area */}
-                {/* 🛑 Add md:ml-64 to offset the main content on desktop 🛑 */}
+                {/*Main Content Area */}
                 <div className="flex-1 flex flex-col overflow-hidden md:ml-64 transition-all duration-300">
                     
-                    {/* Admin Header Bar */}
+                    {/* Admin header bar */}
                     <header className="bg-white dark:bg-gray-800 shadow-md p-4 flex justify-between items-center text-gray-900 dark:text-gray-100 sticky top-0 z-20 transition duration-300">
                         
                         <div className="flex items-center">
-                            {/* 🛑 Mobile Toggle Button (Visible only below md breakpoint) 🛑 */}
+                            {/*mobile toggle button*/}
                             <button 
                                 onClick={toggleSidebar} 
                                 className="md:hidden text-gray-100! dark:text-gray-100! bg-blue-600! p-2 mr-3"
@@ -65,9 +62,8 @@ const AdminLayout = ({ children, title = 'Admin Dashboard | Courierlyn' }) => {
                         </button>
                     </header>
                     
-                    {/* Main Content Body */}
+                    {/*main content body */}
                     <main className="flex-1 overflow-y-auto p-4 md:p-6">
-                        {/* Remove redundant overflow-x-hidden here, the parent handles it */}
                         <div> 
                             {children}
                         </div>
@@ -75,7 +71,7 @@ const AdminLayout = ({ children, title = 'Admin Dashboard | Courierlyn' }) => {
                 </div>
             </div>
             
-            {/* Optional: Add body class to prevent background scroll when sidebar is open on mobile */}
+            {/*prevent background scroll when sidebar is open on mobile*/}
             {isSidebarOpen && (
                  <style dangerouslySetInnerHTML={{__html: `body { overflow: hidden; }`}} />
             )}
